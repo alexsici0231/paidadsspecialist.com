@@ -442,7 +442,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 0 36
 <!-- ═══ NAV ══════════════════════════════════════════════════════════ -->
 <nav class="nav" id="mainNav">
   <div class="nav-inner">
-    <a href="/" class="logo">Alex<span>.</span>Ads</a>
+    <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});closeNav();return false;" class="logo">Alex<span>.</span>Ads</a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#services" onclick="closeNav()">Services</a></li>
       <li><a href="#cases" onclick="closeNav()">Results</a></li>
@@ -661,7 +661,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 0 36
           <div class="pf no"><div class="check">–</div>Retargeting audiences</div>
         </div>
         <div class="plan-actions">
-          <a href="#contact" class="btn btn-outline">Get Started</a>
+          <button onclick="openGetStarted('Meta Ads — Starter ($450 one-time)')" class="btn btn-outline">Get Started</button>
           <button class="btn-ghost" onclick="openModal('metaStarterModal')">View full scope →</button>
         </div>
       </div>
@@ -685,7 +685,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 0 36
           <div class="pf no"><div class="check">–</div>A/B audience testing</div>
         </div>
         <div class="plan-actions">
-          <a href="#contact" class="btn btn-primary">Get Started</a>
+          <button onclick="openGetStarted('Meta Ads — Growth ($800/mo)')" class="btn btn-primary">Get Started</button>
           <button class="btn-ghost" onclick="openModal('metaGrowthModal')">View full scope →</button>
         </div>
       </div>
@@ -708,7 +708,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 0 36
           <div class="pf yes"><div class="check">✓</div>Landing page + offer recommendations</div>
         </div>
         <div class="plan-actions">
-          <a href="#contact" class="btn btn-outline">Get Started</a>
+          <button onclick="openGetStarted('Meta Ads — Scale ($1,300/mo)')" class="btn btn-outline">Get Started</button>
           <button class="btn-ghost" onclick="openModal('metaScaleModal')">View full scope →</button>
         </div>
       </div>
@@ -734,7 +734,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 0 36
           <div class="pf no"><div class="check">–</div>Ongoing optimization</div>
         </div>
         <div class="plan-actions">
-          <a href="#contact" class="btn btn-outline">Get Started</a>
+          <button onclick="openGetStarted('Google Ads — Starter ($500 one-time)')" class="btn btn-outline">Get Started</button>
           <button class="btn-ghost" onclick="openModal('googleStarterModal')">View full scope →</button>
         </div>
       </div>
@@ -758,7 +758,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 0 36
           <div class="pf no"><div class="check">–</div>A/B ad copy testing</div>
         </div>
         <div class="plan-actions">
-          <a href="#contact" class="btn btn-primary">Get Started</a>
+          <button onclick="openGetStarted('Google Ads — Growth ($900/mo)')" class="btn btn-primary">Get Started</button>
           <button class="btn-ghost" onclick="openModal('googleGrowthModal')">View full scope →</button>
         </div>
       </div>
@@ -781,7 +781,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 0 36
           <div class="pf yes"><div class="check">✓</div>Landing page + CTA recommendations</div>
         </div>
         <div class="plan-actions">
-          <a href="#contact" class="btn btn-outline">Get Started</a>
+          <button onclick="openGetStarted('Google Ads — Scale ($1,400/mo)')" class="btn btn-outline">Get Started</button>
           <button class="btn-ghost" onclick="openModal('googleScaleModal')">View full scope →</button>
         </div>
       </div>
@@ -805,7 +805,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 0 36
           <div class="pf no"><div class="check">–</div>Ongoing management</div>
         </div>
         <div class="plan-actions">
-          <a href="#contact" class="btn btn-outline">Get Started</a>
+          <button onclick="openGetStarted('Combo — Starter ($800 one-time)')" class="btn btn-outline">Get Started</button>
         </div>
       </div>
 
@@ -826,7 +826,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 0 36
           <div class="pf yes"><div class="check">✓</div>Up to 4 Meta static creatives</div>
         </div>
         <div class="plan-actions">
-          <a href="#contact" class="btn btn-primary">Get Started</a>
+          <button onclick="openGetStarted('Combo — Growth ($1,500/mo)')" class="btn btn-primary">Get Started</button>
         </div>
       </div>
 
@@ -846,7 +846,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 0 36
           <div class="pf yes"><div class="check">✓</div>Multi-channel scaling strategy</div>
         </div>
         <div class="plan-actions">
-          <a href="#contact" class="btn btn-outline">Get Started</a>
+          <button onclick="openGetStarted('Combo — Scale ($2,200/mo)')" class="btn btn-outline">Get Started</button>
         </div>
       </div>
     </div>
@@ -1457,10 +1457,69 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 0 36
   </div>
 </div>
 
+<!-- ═══ GET STARTED MODAL ════════════════════════════════════════════ -->
+<div class="modal-overlay" id="gsModal" onclick="closeModalOnBg(event,'gsModal')">
+  <div class="modal" style="max-width:460px">
+    <div class="modal-head">
+      <div>
+        <div style="font-size:.72rem;color:var(--blue2);font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem">Selected Package</div>
+        <h3 id="gsTitle" style="font-size:1.1rem"></h3>
+      </div>
+      <button class="modal-close" onclick="closeModal('gsModal')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p style="margin-bottom:1.25rem">Leave your contact info and I'll reach out within 24 hours to discuss this package.</p>
+      <form id="gsForm" onsubmit="submitGetStarted(event)" style="display:flex;flex-direction:column;gap:12px">
+        <input class="form-input" type="text" id="gsName" placeholder="Your name" required/>
+        <input class="form-input" type="email" id="gsEmail" placeholder="Email address" required/>
+        <button type="submit" class="btn btn-primary" id="gsBtn" style="width:100%;justify-content:center;padding:16px;margin-top:4px">Send Request →</button>
+      </form>
+      <p style="font-size:.75rem;color:var(--muted2);text-align:center;margin-top:.75rem">No spam. No commitment.</p>
+    </div>
+  </div>
+</div>
+
 <!-- ═══════════════════════════════════════════════════════════════════
      JAVASCRIPT
 ════════════════════════════════════════════════════════════════════ -->
 <script>
+// ── TELEGRAM BOT CONFIG ──────────────────────────────────────────────
+const TG_TOKEN = 'YOUR_BOT_TOKEN';   // замени на токен от @BotFather
+const TG_CHAT_ID = 'YOUR_CHAT_ID';  // замени на свой chat_id
+
+// ── GET STARTED MODAL ────────────────────────────────────────────────
+function openGetStarted(pkg){
+  document.getElementById('gsTitle').textContent = pkg;
+  document.getElementById('gsForm').reset();
+  const btn = document.getElementById('gsBtn');
+  btn.textContent = 'Send Request →';
+  btn.disabled = false;
+  openModal('gsModal');
+}
+function submitGetStarted(e){
+  e.preventDefault();
+  const btn = document.getElementById('gsBtn');
+  const name = document.getElementById('gsName').value.trim();
+  const email = document.getElementById('gsEmail').value.trim();
+  const pkg = document.getElementById('gsTitle').textContent;
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  const text = `🎯 New Lead!\n\n📦 Package: ${pkg}\n👤 Name: ${name}\n📧 Email: ${email}`;
+  fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({chat_id:TG_CHAT_ID, text})
+  })
+  .then(r=>r.json())
+  .then(d=>{
+    if(d.ok){closeModal('gsModal');window.location.href='thank-you.html';}
+    else{btn.textContent='Error — Try Again';btn.disabled=false;}
+  })
+  .catch(()=>{btn.textContent='Error — Try Again';btn.disabled=false;});
+}
+
 // ── NAV SCROLL ───────────────────────────────────────────────────────
 window.addEventListener('scroll',()=>{
   document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>40);
