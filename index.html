@@ -25,10 +25,6 @@
 <!-- GTM placeholder -->
 <!-- Google Tag Manager — replace GTM-XXXXXXX -->
 <!-- Meta Pixel — replace with real pixel ID -->
-<!-- Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet"/>
 <style>
 /* ═══════════════════════════════════════════
    TOKENS & RESET
@@ -51,8 +47,8 @@
   --white:#F8FAFC;
   --muted:#94A3B8;
   --muted2:#64748B;
-  --font-head:'Syne',sans-serif;
-  --font-body:'DM Sans',sans-serif;
+  --font-head:system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-body:system-ui,-apple-system,'Segoe UI',sans-serif;
   --r:12px;
   --r2:20px;
   --transition:cubic-bezier(.25,.46,.45,.94);
@@ -85,22 +81,6 @@ section{padding:100px 0}
 @media(max-width:900px){.grid-2{grid-template-columns:1fr;gap:40px}.grid-3{grid-template-columns:1fr}}
 @media(max-width:640px){section{padding:70px 0}.container{padding:0 20px}}
 
-/* ═══════════════════════════════════════════
-   SCROLL ANIMATIONS
-═══════════════════════════════════════════ */
-.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s var(--transition),transform .8s var(--transition)}
-.reveal.visible{opacity:1;transform:none}
-.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity .8s var(--transition),transform .8s var(--transition)}
-.reveal-left.visible{opacity:1;transform:none}
-.reveal-right{opacity:0;transform:translateX(40px);transition:opacity .8s var(--transition),transform .8s var(--transition)}
-.reveal-right.visible{opacity:1;transform:none}
-.stagger>*{opacity:0;transform:translateY(30px);transition:opacity .7s var(--transition),transform .7s var(--transition)}
-.stagger.visible>*:nth-child(1){opacity:1;transform:none;transition-delay:.05s}
-.stagger.visible>*:nth-child(2){opacity:1;transform:none;transition-delay:.15s}
-.stagger.visible>*:nth-child(3){opacity:1;transform:none;transition-delay:.25s}
-.stagger.visible>*:nth-child(4){opacity:1;transform:none;transition-delay:.35s}
-.stagger.visible>*:nth-child(5){opacity:1;transform:none;transition-delay:.45s}
-.stagger.visible>*:nth-child(6){opacity:1;transform:none;transition-delay:.55s}
 
 /* ═══════════════════════════════════════════
    BUTTONS
@@ -128,7 +108,7 @@ section{padding:100px 0}
 .nav-links a{font-size:.88rem;color:var(--muted);transition:color .2s;font-weight:500}
 .nav-links a:hover{color:var(--white)}
 .nav-cta{display:flex;align-items:center;gap:12px}
-@media(max-width:768px){.nav-links{display:none;position:fixed;top:68px;left:0;right:0;background:rgba(7,9,15,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);flex-direction:column;align-items:flex-start;padding:20px 24px;gap:20px;z-index:999}.nav-links.open{display:flex}.hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:6px;border:1px solid var(--border);border-radius:8px;background:none;margin-left:auto;margin-right:12px}.hamburger span{display:block;width:20px;height:2px;background:var(--white);border-radius:2px;transition:all .3s}.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}.hamburger.open span:nth-child(2){opacity:0}.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}}
+@media(max-width:768px){.nav-cta{display:none}.nav-links{display:none;position:fixed;top:68px;left:0;right:0;background:rgba(7,9,15,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);flex-direction:column;align-items:flex-start;padding:20px 24px;gap:20px;z-index:999}.nav-links.open{display:flex}.hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:6px;border:1px solid var(--border);border-radius:8px;background:none;margin-left:auto;margin-right:12px}.hamburger span{display:block;width:20px;height:2px;background:var(--white);border-radius:2px;transition:all .3s}.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}.hamburger.open span:nth-child(2){opacity:0}.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}}
 @media(min-width:769px){.hamburger{display:none}}
 
 /* ═══════════════════════════════════════════
@@ -139,24 +119,20 @@ section{padding:100px 0}
 .hero-glow{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,.18) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-60%);pointer-events:none}
 .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(59,130,246,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,.04) 1px,transparent 1px);background-size:50px 50px;mask-image:radial-gradient(ellipse at center,rgba(0,0,0,.7) 0%,transparent 70%)}
 .hero-content{position:relative;z-index:2;max-width:780px}
-.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25);padding:.4rem 1rem;border-radius:100px;font-size:.8rem;color:var(--blue2);margin-bottom:2rem;animation:fadeSlide .8s .2s both}
-.hero-badge .dot{width:7px;height:7px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.4)}}
-@keyframes fadeSlide{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:none}}
-.hero h1{font-size:clamp(2.8rem,6vw,5.2rem);margin-bottom:1.5rem;animation:fadeSlide .9s .3s both}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25);padding:.4rem 1rem;border-radius:100px;font-size:.8rem;color:var(--blue2);margin-bottom:2rem}
+.hero-badge .dot{width:7px;height:7px;background:var(--green);border-radius:50%}
+.hero h1{font-size:clamp(2.8rem,6vw,5.2rem);margin-bottom:1.5rem}
 .hero h1 .blue{color:var(--blue2)}
 .hero h1 .underline{position:relative;display:inline-block}
 .hero h1 .underline::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--gold));border-radius:2px}
-.hero-sub{font-size:1.2rem;color:var(--muted);margin-bottom:2.5rem;max-width:580px;animation:fadeSlide 1s .4s both;line-height:1.75}
-.hero-actions{display:flex;gap:14px;flex-wrap:wrap;animation:fadeSlide 1s .5s both}
-.hero-stats{display:flex;gap:40px;margin-top:4rem;padding-top:3rem;border-top:1px solid var(--border);animation:fadeSlide 1s .7s both}
+.hero-sub{font-size:1.2rem;color:var(--muted);margin-bottom:2.5rem;max-width:580px;line-height:1.75}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.hero-stats{display:flex;gap:40px;margin-top:4rem;padding-top:3rem;border-top:1px solid var(--border)}
 .hero-stat{}
 .hero-stat strong{font-family:var(--font-head);font-size:2rem;font-weight:800;display:block;line-height:1;color:var(--white)}
 .hero-stat strong span{color:var(--blue2)}
 .hero-stat small{font-size:.8rem;color:var(--muted);margin-top:.25rem;display:block}
-.scroll-indicator{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted2);font-size:.75rem;letter-spacing:.1em;animation:scrollBounce 2s infinite}
-@keyframes scrollBounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
-.scroll-indicator svg{width:20px;height:20px}
+.scroll-indicator{display:none}
 
 /* ═══════════════════════════════════════════
    TRUST BAR
@@ -389,27 +365,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 0 36
 .cookie-decline{background:transparent;border:1px solid var(--border);color:var(--muted)}
 .cookie-decline:hover{border-color:var(--muted);color:var(--white)}
 
-/* ═══════════════════════════════════════════
-   EXIT POPUP
-═══════════════════════════════════════════ */
-.exit-popup-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(10px);z-index:3000;opacity:0;pointer-events:none;transition:opacity .4s;display:flex;align-items:center;justify-content:center;padding:20px}
-.exit-popup-overlay.show{opacity:1;pointer-events:all}
-.exit-popup{background:var(--bg2);border:1px solid var(--border2);border-radius:28px;max-width:520px;width:100%;padding:48px 40px;text-align:center;transform:scale(.93);transition:transform .4s var(--transition);position:relative}
-.exit-popup-overlay.show .exit-popup{transform:none}
-.exit-tag{display:inline-flex;align-items:center;gap:.4rem;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);border-radius:100px;padding:6px 16px;font-size:.8rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;margin-bottom:1.5rem}
-.exit-popup h2{font-size:2.2rem;margin-bottom:1rem;line-height:1.2}
-.exit-popup h2 span{color:var(--gold)}
-.exit-popup p{color:var(--muted);line-height:1.7;margin-bottom:2rem;font-size:.95rem}
-.exit-input-row{display:flex;gap:0;background:var(--bg3);border:1px solid var(--border);border-radius:100px;overflow:hidden;margin-bottom:1rem}
-.exit-input-row input{flex:1;background:transparent;border:none;padding:14px 20px;font-family:var(--font-body);font-size:.9rem;color:var(--white);outline:none}
-.exit-input-row input::placeholder{color:var(--muted2)}
-.exit-input-row button{background:var(--gold);color:#000;border:none;padding:0 24px;font-weight:700;font-size:.9rem;cursor:pointer;transition:background .2s;white-space:nowrap}
-.exit-input-row button:hover{background:var(--gold2)}
-.exit-close{position:absolute;top:20px;right:20px;width:32px;height:32px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--muted);cursor:pointer;transition:all .2s}
-.exit-close:hover{border-color:var(--white);color:var(--white)}
-.exit-disclaimer{font-size:.72rem;color:var(--muted2)}
-.exit-timer{display:inline-block;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.25);color:#f87171;border-radius:100px;padding:4px 14px;font-size:.8rem;font-weight:600;margin-bottom:1.5rem}
-.exit-timer span{font-weight:800}
 
 /* ═══════════════════════════════════════════
    TELEGRAM CHAT WIDGET
@@ -456,7 +411,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 0 36
   .cta-box{padding:40px 24px}
   .audit-form{gap:12px}
   .problems-grid{grid-template-columns:1fr}
-  .tg-widget{bottom:18px;right:18px}
+  .tg-widget{bottom:16px;right:16px}
+  .tg-bubble{width:calc(100vw - 32px);right:0}
   .pricing-group.active{grid-template-columns:1fr}
   .about-achievements{grid-template-columns:1fr 1fr}
   .exit-popup{padding:36px 24px}
@@ -482,23 +438,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 0 36
   </div>
 </div>
 
-<!-- ═══ EXIT POPUP ═══════════════════════════════════════════════════ -->
-<div class="exit-popup-overlay" id="exitPopup">
-  <div class="exit-popup">
-    <div class="exit-close" onclick="closeExit()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-    </div>
-    <div class="exit-tag">⏰ Limited Offer</div>
-    <div class="exit-timer">Expires in: <span id="exitCountdown">09:47</span></div>
-    <h2>Wait — Get <span>10% OFF</span><br/>Your First Month</h2>
-    <p>Leave your email and I'll send you a <strong>personalized audit of your current ads</strong> + a 10% discount code for any package. No obligations.</p>
-    <div class="exit-input-row">
-      <input type="email" placeholder="your@email.com" id="exitEmail"/>
-      <button onclick="claimExit()">Claim Now →</button>
-    </div>
-    <p class="exit-disclaimer">No spam. Unsubscribe anytime. Offer valid for new clients only.</p>
-  </div>
-</div>
 
 <!-- ═══ NAV ══════════════════════════════════════════════════════════ -->
 <nav class="nav" id="mainNav">
@@ -521,7 +460,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 0 36
 
 <!-- ═══ HERO ══════════════════════════════════════════════════════════ -->
 <section class="hero">
-  <canvas id="hero-canvas"></canvas>
   <div class="hero-glow"></div>
   <div class="hero-grid"></div>
   <div class="container">
@@ -1526,83 +1464,10 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 0 36
      JAVASCRIPT
 ════════════════════════════════════════════════════════════════════ -->
 <script>
-// ── PARTICLE CANVAS ──────────────────────────────────────────────────
-(function(){
-  const canvas = document.getElementById('hero-canvas');
-  if(window.innerWidth<768){canvas.style.display='none';return;}
-  const ctx = canvas.getContext('2d');
-  let W,H,particles=[];
-  const N=45, MOUSE={x:null,y:null};
-
-  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=canvas.closest('.hero').offsetHeight||window.innerHeight}
-  window.addEventListener('resize',()=>{resize();init()});
-  resize();
-
-  function Particle(){
-    this.x=Math.random()*W;
-    this.y=Math.random()*H;
-    this.vx=(Math.random()-.5)*.3;
-    this.vy=(Math.random()-.5)*.3;
-    this.r=Math.random()*1.8+.4;
-    this.alpha=Math.random()*.6+.2;
-    this.color=Math.random()>.5?'59,130,246':'96,165,250';
-  }
-  Particle.prototype.update=function(){
-    this.x+=this.vx;this.y+=this.vy;
-    if(this.x<0||this.x>W)this.vx*=-1;
-    if(this.y<0||this.y>H)this.vy*=-1;
-    if(MOUSE.x){
-      const dx=this.x-MOUSE.x,dy=this.y-MOUSE.y,dist=Math.sqrt(dx*dx+dy*dy);
-      if(dist<120){const f=.15*(1-dist/120);this.x+=dx*f;this.y+=dy*f}
-    }
-  };
-  Particle.prototype.draw=function(){
-    ctx.beginPath();
-    ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
-    ctx.fillStyle=`rgba(${this.color},${this.alpha})`;
-    ctx.fill();
-  };
-
-  function init(){particles=[];for(let i=0;i<N;i++)particles.push(new Particle())}
-  init();
-
-  function drawLines(){
-    for(let i=0;i<particles.length;i++){
-      for(let j=i+1;j<particles.length;j++){
-        const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y;
-        const dist=Math.sqrt(dx*dx+dy*dy);
-        if(dist<100){
-          const alpha=.15*(1-dist/100);
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x,particles[i].y);
-          ctx.lineTo(particles[j].x,particles[j].y);
-          ctx.strokeStyle=`rgba(59,130,246,${alpha})`;
-          ctx.lineWidth=.5;
-          ctx.stroke();
-        }
-      }
-    }
-  }
-
-  function frame(){
-    ctx.clearRect(0,0,W,H);
-    particles.forEach(p=>{p.update();p.draw()});
-    drawLines();
-    requestAnimationFrame(frame);
-  }
-  frame();
-
-  document.addEventListener('mousemove',e=>{
-    const r=canvas.getBoundingClientRect();
-    MOUSE.x=e.clientX-r.left;MOUSE.y=e.clientY-r.top;
-  });
-  document.addEventListener('mouseleave',()=>{MOUSE.x=null;MOUSE.y=null});
-})();
-
 // ── NAV SCROLL ───────────────────────────────────────────────────────
 window.addEventListener('scroll',()=>{
   document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>40);
-});
+},{passive:true});
 
 // ── HAMBURGER ────────────────────────────────────────────────────────
 function toggleNav(){
@@ -1613,12 +1478,6 @@ function closeNav(){
   document.getElementById('navLinks').classList.remove('open');
   document.getElementById('hamburger').classList.remove('open');
 }
-
-// ── SCROLL REVEAL ────────────────────────────────────────────────────
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
-},{threshold:.12});
-document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.stagger').forEach(el=>observer.observe(el));
 
 // ── PRICING TABS ─────────────────────────────────────────────────────
 function switchPricing(name,btn){
@@ -1647,48 +1506,8 @@ setTimeout(()=>{
   if(!localStorage.getItem('cookieChoice'))
     document.getElementById('cookieBanner').classList.add('show');
 },2000);
-function acceptCookie(){
-  localStorage.setItem('cookieChoice','accepted');
-  document.getElementById('cookieBanner').classList.remove('show');
-  // Activate GTM/Pixel here after consent
-}
-function closeCookie(){
-  localStorage.setItem('cookieChoice','declined');
-  document.getElementById('cookieBanner').classList.remove('show');
-}
-
-// ── EXIT POPUP ───────────────────────────────────────────────────────
-let exitShown=false,exitTimer=null,exitSecs=587;
-function startExitTimer(){
-  exitTimer=setInterval(()=>{
-    exitSecs--;
-    const m=Math.floor(exitSecs/60),s=exitSecs%60;
-    const el=document.getElementById('exitCountdown');
-    if(el)el.textContent=m+':'+(s<10?'0':'')+s;
-    if(exitSecs<=0){clearInterval(exitTimer);closeExit()}
-  },1000);
-}
-document.addEventListener('mouseleave',e=>{
-  if(e.clientY<10&&!exitShown&&!sessionStorage.getItem('exitSeen')){
-    exitShown=true;
-    sessionStorage.setItem('exitSeen','1');
-    document.getElementById('exitPopup').classList.add('show');
-    document.body.style.overflow='hidden';
-    startExitTimer();
-  }
-});
-function closeExit(){
-  document.getElementById('exitPopup').classList.remove('show');
-  document.body.style.overflow='';
-  clearInterval(exitTimer);
-}
-function claimExit(){
-  const email=document.getElementById('exitEmail').value;
-  if(!email||!email.includes('@')){alert('Please enter a valid email');return}
-  // Send to CRM here
-  closeExit();
-  setTimeout(()=>alert('✓ Got it! Check your inbox for the discount code within 24 hours.'),300);
-}
+function acceptCookie(){localStorage.setItem('cookieChoice','accepted');document.getElementById('cookieBanner').classList.remove('show')}
+function closeCookie(){localStorage.setItem('cookieChoice','declined');document.getElementById('cookieBanner').classList.remove('show')}
 
 // ── TELEGRAM WIDGET ──────────────────────────────────────────────────
 let tgOpen=false;
@@ -1697,29 +1516,16 @@ function toggleTg(){
   document.getElementById('tgBubble').classList.toggle('open',tgOpen);
   document.getElementById('tgBadge').style.display=tgOpen?'none':'flex';
 }
-setTimeout(()=>{
-  if(!sessionStorage.getItem('tgShown')){
-    sessionStorage.setItem('tgShown','1');
-    document.getElementById('tgBubble').classList.add('open');
-    tgOpen=true;
-    setTimeout(()=>{
-      document.getElementById('tgBubble').classList.remove('open');
-      tgOpen=false;
-    },5000);
-  }
-},6000);
 
 // ── FORM ─────────────────────────────────────────────────────────────
 function submitForm(e){
   e.preventDefault();
   const form=e.target,btn=form.querySelector('button[type=submit]');
   btn.textContent='Sending...';btn.disabled=true;
-  // Replace with actual CRM endpoint (e.g. Zapier, Make, etc.)
   setTimeout(()=>{
     form.querySelectorAll('input,select').forEach(i=>i.value='');
     document.getElementById('formSuccess').style.display='block';
     btn.textContent='Request Sent!';
-    // Track conversion
     if(typeof fbq!=='undefined')fbq('track','Lead');
     if(typeof gtag!=='undefined')gtag('event','conversion',{send_to:'AW-XXXXXXXXX/XXXXXXXXXX'});
   },1200);
@@ -1732,23 +1538,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'})}
   });
 });
-
-// ── COUNTER ANIMATION ────────────────────────────────────────────────
-function animateCounter(el,target,suffix=''){
-  let current=0;const inc=target/60;
-  const timer=setInterval(()=>{
-    current+=inc;
-    if(current>=target){current=target;clearInterval(timer)}
-    el.textContent=Math.floor(current)+(suffix);
-  },20);
-}
-const heroObserver=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      heroObserver.unobserve(e.target);
-    }
-  });
-},{threshold:.5});
 </script>
 </body>
 </html>
