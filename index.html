@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Alex Volkov — Meta & Google Ads Specialist | Lead Generation Expert</title>
+<title>Alex Ads — Meta & Google Ads Specialist | Lead Generation Expert</title>
 <meta name="description" content="Performance-driven Meta Ads & Google Ads specialist. Reduce cost per lead by 30–50%. $2M+ revenue generated. Free audit — no commitment."/>
 <meta name="keywords" content="Meta Ads specialist, Google Ads freelancer, Facebook ads expert, lead generation, paid advertising, PPC management, ad campaign optimization"/>
 <meta name="robots" content="index,follow"/>
-<meta name="author" content="Alex Volkov"/>
+<meta name="author" content="Alex Ads"/>
 <link rel="canonical" href="https://paidadsspecialist.com/"/>
 <!-- Open Graph -->
-<meta property="og:title" content="Alex Volkov — Meta & Google Ads Specialist"/>
+<meta property="og:title" content="Alex Ads — Meta & Google Ads Specialist"/>
 <meta property="og:description" content="Data-driven paid advertising. Reduce CPL 30–50%. $2M+ revenue generated for clients."/>
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://paidadsspecialist.com/"/>
@@ -18,10 +18,10 @@
 <meta property="og:locale" content="en_US"/>
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Alex Volkov — Meta & Google Ads Specialist"/>
+<meta name="twitter:title" content="Alex Ads — Meta & Google Ads Specialist"/>
 <meta name="twitter:description" content="Data-driven paid advertising. Reduce CPL 30–50%."/>
 <!-- Schema.org -->
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Alex Volkov — Ads Specialist","url":"https://paidadsspecialist.com","description":"Meta Ads and Google Ads management specialist focused on lead generation and revenue growth","founder":{"@type":"Person","name":"Alex Volkov"},"areaServed":["US","EU"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Advertising Services","itemListElement":[{"@type":"Offer","name":"Meta Ads Starter","price":"450","priceCurrency":"USD"},{"@type":"Offer","name":"Meta Ads Growth","price":"800","priceCurrency":"USD"},{"@type":"Offer","name":"Google Ads Growth","price":"900","priceCurrency":"USD"}]}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Alex Ads — Ads Specialist","url":"https://paidadsspecialist.com","description":"Meta Ads and Google Ads management specialist focused on lead generation and revenue growth","founder":{"@type":"Person","name":"Alex Ads"},"areaServed":["US","EU"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Advertising Services","itemListElement":[{"@type":"Offer","name":"Meta Ads Starter","price":"450","priceCurrency":"USD"},{"@type":"Offer","name":"Meta Ads Growth","price":"800","priceCurrency":"USD"},{"@type":"Offer","name":"Google Ads Growth","price":"900","priceCurrency":"USD"}]}}</script>
 <!-- GTM placeholder -->
 <!-- Google Tag Manager — replace GTM-XXXXXXX -->
 <!-- Meta Pixel — replace with real pixel ID -->
@@ -128,7 +128,8 @@ section{padding:100px 0}
 .nav-links a{font-size:.88rem;color:var(--muted);transition:color .2s;font-weight:500}
 .nav-links a:hover{color:var(--white)}
 .nav-cta{display:flex;align-items:center;gap:12px}
-@media(max-width:768px){.nav-links{display:none}}
+@media(max-width:768px){.nav-links{display:none;position:fixed;top:68px;left:0;right:0;background:rgba(7,9,15,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);flex-direction:column;align-items:flex-start;padding:20px 24px;gap:20px;z-index:999}.nav-links.open{display:flex}.hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:6px;border:1px solid var(--border);border-radius:8px;background:none;margin-left:auto;margin-right:12px}.hamburger span{display:block;width:20px;height:2px;background:var(--white);border-radius:2px;transition:all .3s}.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}.hamburger.open span:nth-child(2){opacity:0}.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}}
+@media(min-width:769px){.hamburger{display:none}}
 
 /* ═══════════════════════════════════════════
    HERO
@@ -449,7 +450,9 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 0 36
 ═══════════════════════════════════════════ */
 @media(max-width:640px){
   .hero-stats{flex-direction:column;gap:24px}
-  .hero h1{font-size:2.6rem}
+  .hero h1{font-size:2rem}
+  .hero-sub{font-size:1rem}
+  .hero-actions{flex-direction:column;gap:10px}.hero-actions .btn{width:100%;justify-content:center}
   .cta-box{padding:40px 24px}
   .audit-form{gap:12px}
   .problems-grid{grid-template-columns:1fr}
@@ -501,12 +504,15 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 0 36
 <nav class="nav" id="mainNav">
   <div class="nav-inner">
     <div class="logo">Alex<span>.</span>Ads</div>
-    <ul class="nav-links">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#cases">Results</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#faq">FAQ</a></li>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#services" onclick="closeNav()">Services</a></li>
+      <li><a href="#cases" onclick="closeNav()">Results</a></li>
+      <li><a href="#about" onclick="closeNav()">About</a></li>
+      <li><a href="#faq" onclick="closeNav()">FAQ</a></li>
     </ul>
+    <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
     <div class="nav-cta">
       <a href="#contact" class="btn btn-primary" style="padding:11px 24px;font-size:.88rem">Free Audit →</a>
     </div>
@@ -1230,7 +1236,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 0 36
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2025 Alex Volkov. All rights reserved.</span>
+      <span>© 2025 Alex Ads. All rights reserved.</span>
       <div class="footer-legal">
         <a href="#" onclick="openModal('privacyModal');return false">Privacy Policy</a>
         <a href="#" onclick="openModal('cookieModal');return false">Cookie Policy</a>
@@ -1448,7 +1454,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 0 36
       <h4>7. Cookies</h4>
       <p>We use cookies for analytics and advertising. See our Cookie Policy for full details.</p>
       <h4>8. Contact</h4>
-      <p>Alex Volkov · hello@paidadsspecialist.com · For privacy inquiries, we respond within 30 days.</p>
+      <p>Alex Ads · hello@paidadsspecialist.com · For privacy inquiries, we respond within 30 days.</p>
     </div>
   </div>
 </div>
@@ -1497,7 +1503,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 0 36
     <div class="modal-body">
       <p><em>Last updated: January 1, 2025</em></p>
       <h4>1. Services</h4>
-      <p>Alex Volkov ("Specialist") provides Meta Ads and Google Ads management services as described in the selected package. Services begin after receipt of full payment and all required client materials.</p>
+      <p>Alex Ads ("Specialist") provides Meta Ads and Google Ads management services as described in the selected package. Services begin after receipt of full payment and all required client materials.</p>
       <h4>2. Payment Terms</h4>
       <p>100% payment is due before work commences. Monthly retainers are billed at the start of each service period. All prices are in USD.</p>
       <h4>3. Cancellation</h4>
@@ -1523,11 +1529,12 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 0 36
 // ── PARTICLE CANVAS ──────────────────────────────────────────────────
 (function(){
   const canvas = document.getElementById('hero-canvas');
+  if(window.innerWidth<768){canvas.style.display='none';return;}
   const ctx = canvas.getContext('2d');
   let W,H,particles=[];
-  const N=80, MOUSE={x:null,y:null};
+  const N=45, MOUSE={x:null,y:null};
 
-  function resize(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight}
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=canvas.closest('.hero').offsetHeight||window.innerHeight}
   window.addEventListener('resize',()=>{resize();init()});
   resize();
 
@@ -1564,8 +1571,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 0 36
       for(let j=i+1;j<particles.length;j++){
         const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y;
         const dist=Math.sqrt(dx*dx+dy*dy);
-        if(dist<140){
-          const alpha=.15*(1-dist/140);
+        if(dist<100){
+          const alpha=.15*(1-dist/100);
           ctx.beginPath();
           ctx.moveTo(particles[i].x,particles[i].y);
           ctx.lineTo(particles[j].x,particles[j].y);
@@ -1596,6 +1603,16 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 0 36
 window.addEventListener('scroll',()=>{
   document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>40);
 });
+
+// ── HAMBURGER ────────────────────────────────────────────────────────
+function toggleNav(){
+  document.getElementById('navLinks').classList.toggle('open');
+  document.getElementById('hamburger').classList.toggle('open');
+}
+function closeNav(){
+  document.getElementById('navLinks').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+}
 
 // ── SCROLL REVEAL ────────────────────────────────────────────────────
 const observer=new IntersectionObserver(entries=>{
