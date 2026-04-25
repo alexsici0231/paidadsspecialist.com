@@ -442,7 +442,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 0 36
 <!-- ═══ NAV ══════════════════════════════════════════════════════════ -->
 <nav class="nav" id="mainNav">
   <div class="nav-inner">
-    <div class="logo">Alex<span>.</span>Ads</div>
+    <a href="/" class="logo">Alex<span>.</span>Ads</a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#services" onclick="closeNav()">Services</a></li>
       <li><a href="#cases" onclick="closeNav()">Results</a></li>
@@ -464,10 +464,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 0 36
   <div class="hero-grid"></div>
   <div class="container">
     <div class="hero-content">
-      <div class="hero-badge">
-        <div class="dot"></div>
-        Accepting new clients · Q2 2025
-      </div>
       <h1>
         Meta & Google Ads<br/>
         That <span class="blue underline">Actually</span><br/>
@@ -1193,6 +1189,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 0 36
         <div class="name">Alex · Ads Specialist</div>
         <div class="status"><span class="tg-online"></span>Usually replies in minutes</div>
       </div>
+      <button onclick="closeTg()" style="background:none;border:none;color:rgba(255,255,255,.7);font-size:1.2rem;cursor:pointer;line-height:1;margin-left:auto;padding:0 2px">✕</button>
     </div>
     <div class="tg-body">
       <div class="tg-msg">👋 Hey! Have questions about Meta or Google Ads? I'm here to help — no sales pressure.</div>
@@ -1201,14 +1198,14 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 0 36
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.038 9.596c-.148.668-.543.83-1.097.517l-3.025-2.23-1.46 1.403c-.162.162-.298.298-.61.298l.218-3.073 5.607-5.065c.243-.218-.054-.338-.378-.12L6.922 14.41l-2.967-.93c-.644-.202-.658-.644.135-.953l11.575-4.464c.537-.194 1.008.13.897.185z"/></svg>
           Message on Telegram
         </a>
-        <a class="tg-link" href="#contact">
+        <a class="tg-link" href="#contact" onclick="closeTg()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
           Request Free Audit
         </a>
       </div>
     </div>
   </div>
-  <div class="tg-btn" id="tgBtn" onclick="toggleTg()">
+  <div class="tg-btn" id="tgBtn" onclick="toggleTg(event)">
     <div class="tg-badge" id="tgBadge">1</div>
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.038 9.596c-.148.668-.543.83-1.097.517l-3.025-2.23-1.46 1.403c-.162.162-.298.298-.61.298l.218-3.073 5.607-5.065c.243-.218-.054-.338-.378-.12L6.922 14.41l-2.967-.93c-.644-.202-.658-.644.135-.953l11.575-4.464c.537-.194 1.008.13.897.185z"/></svg>
   </div>
@@ -1511,24 +1508,19 @@ function closeCookie(){localStorage.setItem('cookieChoice','declined');document.
 
 // ── TELEGRAM WIDGET ──────────────────────────────────────────────────
 let tgOpen=false;
-function toggleTg(){
-  tgOpen=!tgOpen;
-  document.getElementById('tgBubble').classList.toggle('open',tgOpen);
-  document.getElementById('tgBadge').style.display=tgOpen?'none':'flex';
-}
+function openTg(){tgOpen=true;document.getElementById('tgBubble').classList.add('open');document.getElementById('tgBadge').style.display='none';}
+function closeTg(){tgOpen=false;document.getElementById('tgBubble').classList.remove('open');document.getElementById('tgBadge').style.display='flex';}
+function toggleTg(e){e&&e.stopPropagation();tgOpen?closeTg():openTg();}
+document.addEventListener('click',e=>{if(tgOpen&&!e.target.closest('.tg-widget'))closeTg();});
 
 // ── FORM ─────────────────────────────────────────────────────────────
 function submitForm(e){
   e.preventDefault();
   const form=e.target,btn=form.querySelector('button[type=submit]');
   btn.textContent='Sending...';btn.disabled=true;
-  setTimeout(()=>{
-    form.querySelectorAll('input,select').forEach(i=>i.value='');
-    document.getElementById('formSuccess').style.display='block';
-    btn.textContent='Request Sent!';
-    if(typeof fbq!=='undefined')fbq('track','Lead');
-    if(typeof gtag!=='undefined')gtag('event','conversion',{send_to:'AW-XXXXXXXXX/XXXXXXXXXX'});
-  },1200);
+  if(typeof fbq!=='undefined')fbq('track','Lead');
+  if(typeof gtag!=='undefined')gtag('event','conversion',{send_to:'AW-XXXXXXXXX/XXXXXXXXXX'});
+  setTimeout(()=>{ window.location.href='thank-you.html'; },800);
 }
 
 // ── SMOOTH ANCHOR ────────────────────────────────────────────────────
