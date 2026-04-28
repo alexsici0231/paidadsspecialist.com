@@ -1486,8 +1486,13 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 0 36
 ════════════════════════════════════════════════════════════════════ -->
 <script>
 // ── TELEGRAM BOT CONFIG ──────────────────────────────────────────────
-const TG_TOKEN = '8667114246:AAGil_uEc0bEPqNKJxj2MaKKhIM-y5_8hFw';   // замени на токен от @BotFather
-const TG_CHAT_ID = '350465879';  // замени на свой chat_id
+// ПОДДЕРЖКА И ВОПРОСЫ
+const TG_SUPPORT_TOKEN = '8667114246:AAGil_uEc0bEPqNKJxj2MaKKhIM-y5_8hFw';
+const TG_SUPPORT_CHAT_ID = '350465879';
+
+// ЗАКАЗЫ С САЙТА
+const TG_ORDERS_TOKEN = '8649839996:AAEcSm7D1f8BCKdWrdlOmV3Kxsw86aCosvY';
+const TG_ORDERS_CHAT_ID = '350465879';
 
 // ── GET STARTED MODAL ────────────────────────────────────────────────
 function openGetStarted(pkg){
@@ -1507,10 +1512,10 @@ function submitGetStarted(e){
   btn.textContent = 'Sending...';
   btn.disabled = true;
   const text = `🎯 New Lead!\n\n📦 Package: ${pkg}\n👤 Name: ${name}\n📧 Email: ${email}`;
-  fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`,{
+  fetch(`https://api.telegram.org/bot${TG_ORDERS_TOKEN}/sendMessage`,{
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({chat_id:TG_CHAT_ID, text})
+    body:JSON.stringify({chat_id:TG_ORDERS_CHAT_ID, text})
   })
   .then(r=>r.json())
   .then(d=>{
@@ -1575,11 +1580,34 @@ document.addEventListener('click',e=>{if(tgOpen&&!e.target.closest('.tg-widget')
 // ── FORM ─────────────────────────────────────────────────────────────
 function submitForm(e){
   e.preventDefault();
-  const form=e.target,btn=form.querySelector('button[type=submit]');
-  btn.textContent='Sending...';btn.disabled=true;
-  if(typeof fbq!=='undefined')fbq('track','Lead');
-  if(typeof gtag!=='undefined')gtag('event','conversion',{send_to:'AW-XXXXXXXXX/XXXXXXXXXX'});
-  setTimeout(()=>{ window.location.href='thank-you.html'; },800);
+  const form = e.target;
+  const btn = form.querySelector('button[type=submit]');
+  const name = form.querySelector('input[name="name"]').value.trim();
+  const email = form.querySelector('input[name="email"]').value.trim();
+  const website = form.querySelector('input[name="website"]').value.trim();
+  const platform = form.querySelector('select[name="platform"]').value;
+  const budget = form.querySelector('input[name="budget"]').value.trim();
+
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  const text = `📋 Free Audit Request\n\n👤 Name: ${name}\n📧 Email: ${email}\n🌐 Website: ${website || 'N/A'}\n📱 Platform: ${platform}\n💰 Budget: ${budget || 'Not specified'}`;
+
+  fetch(`https://api.telegram.org/bot${TG_SUPPORT_TOKEN}/sendMessage`,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({chat_id:TG_SUPPORT_CHAT_ID, text})
+  })
+  .then(r=>r.json())
+  .then(d=>{
+    if(d.ok){
+      if(typeof fbq!=='undefined')fbq('track','Lead');
+      if(typeof gtag!=='undefined')gtag('event','conversion',{send_to:'AW-XXXXXXXXX/XXXXXXXXXX'});
+      setTimeout(()=>{ window.location.href='thank-you.html'; },800);
+    }
+    else{btn.textContent='Request Free Audit';btn.disabled=false;}
+  })
+  .catch(()=>{btn.textContent='Request Free Audit';btn.disabled=false;});
 }
 
 // ── SMOOTH ANCHOR ────────────────────────────────────────────────────
